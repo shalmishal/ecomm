@@ -1,0 +1,42 @@
+<div class="container" ng-controller="FriendController as ctrl">
+
+	<p>
+	<p>
+	<p>
+	<p>
+	
+	<p>
+	<p>
+	<p>
+	<p>
+	
+	<div class="form-group has-feedback"></div>
+
+  Search
+
+  <p><input type="text" ng-model="search_text"></p>
+
+
+	<div ng-repeat="UserDetails in ctrl.users | filter: search_text">
+
+		<fieldset>
+			<legend></legend>
+			
+			<p>Online ?: {{UserDetails.is_online}}  
+
+			<p>ID: {{UserDetails.userid}} &nbsp; &nbsp;&nbsp; Name: {{UserDetails.username}}
+			    &nbsp; &nbsp;&nbsp;  <button type="button"  ng-click="ctrl.sendFriendRequest(UserDetails.userid)" 
+			       class="btn btn-warning btn-sm">ACCEPT</button>
+			         <button type="button"  ng-click="ctrl.sendFriendRequest(UserDetails.userid)" 
+			       class="btn btn-warning btn-sm">REJECT</button>
+			       
+			  </p>
+
+			<p>Email: {{UserDetails.email}} &nbsp; &nbsp;&nbsp; Mobile:{{UserDetails.contact}}</p>
+
+			<p> Address:{{UserDetails.address}} &nbsp; &nbsp;&nbsp; Role :{{UserDetails.role}}</p>
+		</fieldset>
+	</div>
+
+
+</div>
