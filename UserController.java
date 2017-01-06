@@ -1,6 +1,9 @@
 package com.niit.controller;
+
 import java.util.List;
+
 import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,26 +21,27 @@ import com.niit.Model.UserDetails;
 
 @RestController
 public class UserController {
+	
 	private static final Logger log=LoggerFactory.getLogger(UserController.class);
 	
-	@Autowired(required=true)
+	@Autowired
 	UserDAO userDAO;
-	@Autowired(required=true)
+	@Autowired
 	UserDetails userDetails;
 	@Autowired
 	FriendDAO friendDAO;
 	
 	//for list
-		@RequestMapping(value="/users", method=RequestMethod.GET)
-		public ResponseEntity<List<UserDetails>> listAllUsers(){
-			log.debug("-->Calling method listAllUsers");
-			List<UserDetails> user=userDAO.list();
-			if(user.isEmpty()){
-				return new ResponseEntity<List<UserDetails>>(HttpStatus.NO_CONTENT);
-			}
-			return new ResponseEntity<List<UserDetails>>(user,HttpStatus.OK);
-			
+	@RequestMapping(value="/users", method=RequestMethod.GET)
+	public ResponseEntity<List<UserDetails>> listAllUsers(){
+		log.debug("-->Calling method listAllUsers");
+		List<UserDetails> user=userDAO.list();
+		if(user.isEmpty()){
+			return new ResponseEntity<List<UserDetails>>(HttpStatus.NO_CONTENT);
 		}
+		return new ResponseEntity<List<UserDetails>>(user,HttpStatus.OK);
+		
+	}
 	//to create users
 	@RequestMapping(value="/createusers/", method=RequestMethod.POST)
 	public ResponseEntity<UserDetails> createusers(@RequestBody UserDetails userDetails){
@@ -108,7 +112,7 @@ public class UserController {
 	
 	//authentication
 	@RequestMapping(value="/user/authenticate",method=RequestMethod.POST)
-	public ResponseEntity<UserDetails> authenticateuser(@RequestBody UserDetails userdetails,HttpSession session)
+	public ResponseEntity<UserDetails> authenticateuser(@RequestBody UserDetails userDetails,HttpSession session)
 	{
 		log.debug("-->calling authenticate method");
 		userDetails=userDAO.authenticate(userDetails.getUserid(), userDetails.getPassword());
@@ -116,8 +120,6 @@ public class UserController {
 		{
 			log.debug("-->User does not exist");
 			userDetails = new UserDetails();
-			userDetails.setErrorcode("404");
-			userDetails.setErrormessage("user does not exist");
 	}
 		else
 		{
