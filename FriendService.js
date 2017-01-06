@@ -1,5 +1,5 @@
 'use strict';
- console.log("start of friend service")
+ 
 app.factory('FriendService', ['$http', '$q','$rootScope', function($http, $q,$rootScope){
 	
 	console.log("FriendService...")
@@ -18,7 +18,7 @@ app.factory('FriendService', ['$http', '$q','$rootScope', function($http, $q,$ro
             },
              
             sendFriendRequest: function(friendid){
-                    return $http.get(BASE_URL+'/addfriend/'+friendid)
+                    return $http.get(BASE_URL+'/addFriend/'+friendid)
                             .then(
                                     function(response){
                                         return response.data;
@@ -43,8 +43,8 @@ app.factory('FriendService', ['$http', '$q','$rootScope', function($http, $q,$ro
                             );
             },
              
-          /*  deleteFriend: function(id){
-                    return $http delete(BASE_URL+'/friend/'+id)
+           /* deleteFriend: function(id){
+                    return $http.delete(BASE_URL+'/friend/'+id)
                             .then(
                                     function(response){
                                         return response.data;
@@ -54,12 +54,10 @@ app.factory('FriendService', ['$http', '$q','$rootScope', function($http, $q,$ro
                                         return $q.reject(errResponse);
                                     }
                             );
-            }
+            }*/
             
-           */
+           
          
     };
  
-}]);/**
- * 
- */
+}]);

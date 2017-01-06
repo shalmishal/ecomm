@@ -48,7 +48,7 @@ app.controller('FriendController', ['UserService','$scope', 'FriendService','$lo
                                function(d) {
                                     self.friends = d;
                                     console.log("Got the friends list")
-                                     	/* $location.path('/view_friend');*/
+                                     	 /*$location.path('/viewfriend');*/
                                },
                                 function(errResponse){
                                     console.error('Error while fetching Friends');
